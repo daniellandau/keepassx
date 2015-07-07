@@ -220,6 +220,9 @@ target_link_libraries(${PROGNAME}
                       ${GCRYPT_LIBRARIES}
                       ${GPGERROR_LIBRARIES}
                       ${ZLIB_LIBRARIES})
+if (WITH_TOTP)
+  target_link_libraries(${PROGNAME} ${OATH_LIBRARIES})
+endif()
 
 set_target_properties(${PROGNAME} PROPERTIES ENABLE_EXPORTS ON)
 

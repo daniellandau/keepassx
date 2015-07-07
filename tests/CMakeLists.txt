@@ -95,6 +95,9 @@ set(TEST_LIBRARIES
     ${GPGERROR_LIBRARIES}
     ${ZLIB_LIBRARIES}
 )
+if (WITH_TOTP)
+  set(TEST_LIBRARIES ${TEST_LIBRARIES} ${OATH_LIBRARIES})
+endif()
 
 set(testsupport_SOURCES modeltest.cpp FailDevice.cpp)
 add_library(testsupport STATIC ${testsupport_SOURCES})

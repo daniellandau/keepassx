@@ -33,6 +33,7 @@ option(WITH_TESTS "Enable building of unit tests" ON)
 option(WITH_GUI_TESTS "Enable building of GUI tests" OFF)
 option(WITH_DEV_BUILD "Use only for development. Disables/warns about deprecated methods." OFF)
 option(WITH_COVERAGE "Use to build with coverage tests. (GCC ONLY)." OFF)
+option(WITH_TOTP "Enable Timed One-Time Password support (TOTP)" OFF)
 
 option(WITH_XC_AUTOTYPE "Include Autotype." OFF)
 option(WITH_XC_HTTP "Include KeePassHTTP." OFF)
@@ -180,6 +181,11 @@ if (WITH_XC_HTTP)
     find_package(LibMicroHTTPD REQUIRED)
 endif(WITH_XC_HTTP)
 
+if (WITH_TOTP)
+  find_package(Oath REQUIRED)
+  add_gcc_compiler_flags("-DWITH_TOTP")
+endif()
+
 find_package(ZLIB REQUIRED)
 
 check_cxx_source_compiles("
@@ -218,6 +224,9 @@ if(UNIX)
 endif()
 
 include_directories(SYSTEM ${GCRYPT_INCLUDE_DIR} ${MHD_INCLUDE_DIR} ${ZLIB_INCLUDE_DIR})
+if (WITH_TOTP)
+  include_directories(${OATH_INCLUDE_DIR})
+endif()
 
 include(FeatureSummary)
 
