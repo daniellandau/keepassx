@@ -191,6 +191,7 @@ if(MINGW)
 endif()
 
 qt5_wrap_ui(keepassx_SOURCES ${keepassx_FORMS})
+qt5_wrap_cpp(keepassx_SOURCES ${keepassx_MOC} OPTIONS ${def_totp})
 
 add_library(zxcvbn STATIC zxcvbn/zxcvbn.cpp)
 target_link_libraries(zxcvbn)
