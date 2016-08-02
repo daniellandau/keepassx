@@ -52,12 +52,10 @@
 #include "gui/group/EditGroupWidget.h"
 #include "gui/group/GroupView.h"
 
-#ifdef WITH_TOTP
 extern "C" {
 #include <liboath/oath.h>
 }
 #define TOTP_ATTR "totp"
-#endif
 
 DatabaseWidget::DatabaseWidget(Database* db, QWidget* parent)
     : QStackedWidget(parent)
@@ -433,7 +431,6 @@ void DatabaseWidget::copyPassword()
     setClipboardTextAndMinimize(currentEntry->password());
 }
 
-#ifdef WITH_TOTP
 void DatabaseWidget::copyTOTP()
 {
     Entry* currentEntry = m_entryView->currentEntry();
@@ -476,7 +473,6 @@ void DatabaseWidget::copyTOTP()
     }
     setClipboardTextAndMinimize(QString(""));
 }
-#endif
 
 void DatabaseWidget::copyURL()
 {
@@ -1232,7 +1228,6 @@ bool DatabaseWidget::currentEntryHasPassword()
     return !currentEntry->password().isEmpty();
 }
 
-#ifdef WITH_TOTP
 bool DatabaseWidget::currentEntryHasTOTP()
 {
     Entry* currentEntry = m_entryView->currentEntry();
@@ -1243,7 +1238,6 @@ bool DatabaseWidget::currentEntryHasTOTP()
     return currentEntry->attributes()->hasKey(TOTP_ATTR) &&
             !currentEntry->attributes()->value(TOTP_ATTR).isEmpty();
 }
-#endif
 
 bool DatabaseWidget::currentEntryHasUrl()
 {

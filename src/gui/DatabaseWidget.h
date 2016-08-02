@@ -86,9 +86,7 @@ public:
     bool currentEntryHasTitle();
     bool currentEntryHasUsername();
     bool currentEntryHasPassword();
-#ifdef WITH_TOTP
     bool currentEntryHasTOTP();
-#endif
     bool currentEntryHasUrl();
     bool currentEntryHasNotes();
     GroupView* groupView();
@@ -123,9 +121,7 @@ public Q_SLOTS:
     void copyTitle();
     void copyUsername();
     void copyPassword();
-#ifdef WITH_TOTP
     void copyTOTP();
-#endif
     void copyURL();
     void copyNotes();
     void copyAttribute(QAction* action);

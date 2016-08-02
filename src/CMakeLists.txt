@@ -191,7 +191,7 @@ if(MINGW)
 endif()
 
 qt5_wrap_ui(keepassx_SOURCES ${keepassx_FORMS})
-qt5_wrap_cpp(keepassx_SOURCES ${keepassx_MOC} OPTIONS ${def_totp})
+qt5_wrap_cpp(keepassx_SOURCES ${keepassx_MOC})
 
 add_library(zxcvbn STATIC zxcvbn/zxcvbn.cpp)
 target_link_libraries(zxcvbn)
@@ -221,9 +221,7 @@ target_link_libraries(${PROGNAME}
                       ${GCRYPT_LIBRARIES}
                       ${GPGERROR_LIBRARIES}
                       ${ZLIB_LIBRARIES})
-if (WITH_TOTP)
-  target_link_libraries(${PROGNAME} ${OATH_LIBRARIES})
-endif()
+target_link_libraries(${PROGNAME} ${OATH_LIBRARIES})
 
 set_target_properties(${PROGNAME} PROPERTIES ENABLE_EXPORTS ON)
 

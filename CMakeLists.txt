@@ -181,12 +181,10 @@ if (WITH_XC_HTTP)
     find_package(LibMicroHTTPD REQUIRED)
 endif(WITH_XC_HTTP)
 
-if (WITH_TOTP)
   find_package(Oath REQUIRED)
   # Used later for moc
   set(def_totp "-DWITH_TOTP")
   add_gcc_compiler_flags(${def_totp})
-endif()
 
 find_package(ZLIB REQUIRED)
 
@@ -226,9 +224,7 @@ if(UNIX)
 endif()
 
 include_directories(SYSTEM ${GCRYPT_INCLUDE_DIR} ${MHD_INCLUDE_DIR} ${ZLIB_INCLUDE_DIR})
-if (WITH_TOTP)
-  include_directories(${OATH_INCLUDE_DIR})
-endif()
+include_directories(${OATH_INCLUDE_DIR})
 
 include(FeatureSummary)
 

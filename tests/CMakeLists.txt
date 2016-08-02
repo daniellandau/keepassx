@@ -58,9 +58,7 @@ macro(add_unit_test)
   add_executable(${_test_NAME} ${_srcList})
   target_link_libraries(${_test_NAME} ${TEST_LIBS})
 
-  if (WITH_TOTP)
-    target_link_libraries(${_test_NAME} ${OATH_LIBRARIES})
-  endif()
+  target_link_libraries(${_test_NAME} ${OATH_LIBRARIES})
   if(NOT TEST_OUTPUT)
     set(TEST_OUTPUT plaintext)
   endif(NOT TEST_OUTPUT)
@@ -98,9 +96,7 @@ set(TEST_LIBRARIES
     ${GPGERROR_LIBRARIES}
     ${ZLIB_LIBRARIES}
 )
-if (WITH_TOTP)
-  set(TEST_LIBRARIES ${TEST_LIBRARIES} ${OATH_LIBRARIES})
-endif()
+set(TEST_LIBRARIES ${TEST_LIBRARIES} ${OATH_LIBRARIES})
 
 set(testsupport_SOURCES modeltest.cpp FailDevice.cpp)
 add_library(testsupport STATIC ${testsupport_SOURCES})
