@@ -21,8 +21,10 @@ target_link_libraries(kdbx-extract
                       Qt5::Core
                       ${GCRYPT_LIBRARIES}
                       ${GPGERROR_LIBRARIES}
-                      ${ZLIB_LIBRARIES}
-                      ${OATH_LIBRARIES})
+                      ${ZLIB_LIBRARIES})
+if (WITH_TOTP)
+  target_link_libraries(kdbx-extract ${OATH_LIBRARIES})
+endif()
 
 add_executable(kdbx-merge kdbx-merge.cpp)
 target_link_libraries(kdbx-merge
@@ -30,8 +32,10 @@ target_link_libraries(kdbx-merge
                       Qt5::Core
                       ${GCRYPT_LIBRARIES}
                       ${GPGERROR_LIBRARIES}
-                      ${ZLIB_LIBRARIES}
-                      ${OATH_LIBRARIES})
+                      ${ZLIB_LIBRARIES})
+if (WITH_TOTP)
+  target_link_libraries(kdbx-merge ${OATH_LIBRARIES})
+endif()
 
 
 add_executable(entropy-meter entropy-meter.cpp)
